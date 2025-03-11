@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math' as math;
 import 'feature_dot.dart';
 import '../screens/prayer_times_screen.dart';
@@ -18,12 +19,33 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   
-  final List<FeatureItem> features = const [
-    FeatureItem("Prayer Times", Icons.access_time, Colors.teal, 'prayer_times'),
-    FeatureItem("Prayer Tracker", Icons.check_circle_outline, Colors.blue, 'prayer_tracker'),
-    FeatureItem("Request Dua", Icons.favorite, Colors.red, 'request_dua'),
-    FeatureItem("Meet", Icons.people, Colors.purple, 'meet'),
-  ];
+  final List<FeatureItem> features = [
+  FeatureItem(
+    "Request Dua", 
+    Icons.volunteer_activism, // Better representation of hands in supplication
+    Color.fromARGB(255, 0, 121, 109), 
+    'request_dua'
+  ),
+  FeatureItem(
+    "Prayer", 
+    Icons.mosque, // Religious building icon
+    Color.fromARGB(255, 0, 121, 109), 
+    'prayer_tracker'
+  ),
+  FeatureItem(
+    "Network", 
+    Icons.people, // People icon (more centered than groups)
+    Color.fromARGB(255, 0, 121, 109), 
+    'request_dua'
+  ),
+  FeatureItem(
+    "Quran", 
+    Icons.menu_book, // Open book icon
+    Color.fromARGB(255, 0, 121, 109), 
+    'meet'
+  ),
+];
+
 
   @override
   void initState() {
