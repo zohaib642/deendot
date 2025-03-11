@@ -7,13 +7,13 @@ class RequestDuaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prayer Times'),
-        backgroundColor: Colors.teal,
+        title: const Text('Request Dua'),
+        backgroundColor: Color.fromARGB(255, 0, 121, 109),
       ),
       body: const Center(
         child: Text(
-          'Prayer Times Feature',
-          style: TextStyle(fontSize: 24),
+          'Request Dua Feature',
+          style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),
     );

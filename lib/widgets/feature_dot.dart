@@ -21,11 +21,9 @@ class FeatureDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 70,
-        height: 70,
+    return Material(
+      color: Colors.transparent,
+      child: Ink(
         decoration: BoxDecoration(
           color: feature.color,
           shape: BoxShape.circle,
@@ -38,25 +36,35 @@ class FeatureDot extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              feature.icon,
-              color: Colors.white,
-              size: 30,
+        child: InkWell(
+          customBorder: CircleBorder(),
+          onTap: () {
+            onTap();
+          },
+          child: SizedBox(
+            width: 70,
+            height: 70,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  feature.icon,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  feature.name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w200,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            const SizedBox(height: 4),
-            Text(
-              feature.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 8,
-                fontWeight: FontWeight.w200,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+          ),
         ),
       ),
     );

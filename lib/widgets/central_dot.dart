@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'feature_dot.dart';
-import '../screens/prayer_times_screen.dart';
-import '../screens/prayer_tracker_screen.dart';
-import '../screens/request_dua_screen.dart';
-import '../screens/meet_screen.dart';
+import '../screens/request_dua.dart';
+import '../screens/prayer.dart';
+import '../screens/network.dart';
+import '../screens/quran.dart';
 
 class CentralDot extends StatefulWidget {
   const CentralDot({Key? key}) : super(key: key);
@@ -21,27 +21,27 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
   final List<FeatureItem> features = [
   FeatureItem(
     "Request Dua", 
-    Icons.volunteer_activism, // Better representation of hands in supplication
+    Icons.volunteer_activism, 
     Color.fromARGB(255, 0, 121, 109), 
     'request_dua'
   ),
   FeatureItem(
     "Prayer", 
-    Icons.mosque, // Religious building icon
+    Icons.mosque, 
     Color.fromARGB(255, 0, 121, 109), 
-    'prayer_tracker'
+    'prayer'
   ),
   FeatureItem(
     "Network", 
-    Icons.people, // People icon (more centered than groups)
+    Icons.people, 
     Color.fromARGB(255, 0, 121, 109), 
-    'request_dua'
+    'network'
   ),
   FeatureItem(
     "Quran", 
-    Icons.menu_book, // Open book icon
+    Icons.menu_book, 
     Color.fromARGB(255, 0, 121, 109), 
-    'meet'
+    'quran'
   ),
 ];
 
@@ -50,7 +50,7 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     _controller = AnimationController(
-      // Longer animation duration
+      
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
@@ -78,53 +78,104 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
   }
 
   void _navigateToFeature(BuildContext context, FeatureItem feature) {
-    _toggleExpansion();
-    
-    // Navigate based on the feature
-    Widget screen;
-    switch (feature.route) {
-      case 'prayer_times':
-        screen = const PrayerTimesScreen();
-        break;
-      case 'prayer_tracker':
-        screen = const PrayerTrackerScreen();
-        break;
-      case 'request_dua':
-        screen = const RequestDuaScreen();
-        break;
-      case 'meet':
-        screen = const MeetScreen();
-        break;
-      default:
-        return;
-    }
-    
-    // Delayed navigation for smooth animation
-    Future.delayed(const Duration(milliseconds: 500), () {
-      Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, animation, __) => screen,
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder: (_, animation, __, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-        ),
-      );
-    });
+  final navigator = Navigator.of(context, rootNavigator: true);
+  
+  Widget screen;
+  switch (feature.route) {
+    case 'request_dua': 
+      screen = const RequestDuaScreen();
+      break;
+    case 'prayer': 
+      screen = const PrayerScreen();
+      break;
+    case 'network': 
+      screen = const NetworkScreen();
+      break;
+    case 'quran': 
+      screen = const QuranScreen();
+      break;
+    default: 
+      return;
   }
 
+  final Color featureColor = feature.color;
+
+  Future.delayed(const Duration(milliseconds: 1), () {
+    _toggleExpansion(); // Delay collapsing the menu until transition starts
+
+    navigator.push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 700),
+        reverseTransitionDuration: const Duration(milliseconds: 500),
+        pageBuilder: (context, animation, secondaryAnimation) => screen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var curve = Curves.easeOutQuint;
+          var tween = Tween(begin: 0.0, end: 1.0).chain(CurveTween(curve: curve));
+          
+          var fadeAnimation = animation.drive(tween);
+          var scaleAnimation = Tween(begin: 0.7, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(0.3, 1.0, curve: Curves.easeOutQuint),
+            ),
+          );
+          var slideAnimation = Tween(
+            begin: Offset(0.0, 0.2),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(0.2, 1.0, curve: Curves.easeOutQuint),
+            ),
+          );
+
+          return AnimatedBuilder(
+            animation: animation,
+            builder: (context, child) {
+              return Stack(
+                children: [
+                  Container(
+                    color: Color.lerp(
+                      Colors.transparent,
+                      featureColor.withOpacity(0.1),
+                      fadeAnimation.value,
+                    ),
+                  ),
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: SlideTransition(
+                      position: slideAnimation,
+                      child: ScaleTransition(
+                        scale: scaleAnimation,
+                        child: child,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+            child: child,
+          );
+        },
+      ),
+    );
+  });
+}
+
+
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Main dot
-        GestureDetector(
-          onTap: _toggleExpansion,
+Widget build(BuildContext context) {
+  return Stack(
+    children: [
+      
+      Positioned(
+        left: MediaQuery.of(context).size.width / 2 - 62.5, 
+        top: MediaQuery.of(context).size.height / 2 - 62.5, 
+        child: GestureDetector(
+          onTap: () {
+
+            _toggleExpansion();
+          },
           child: AnimatedBuilder(
             animation: _scaleAnimation,
             builder: (context, child) {
@@ -154,62 +205,51 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
             },
           ),
         ),
-        
-        // Feature dots - now appearing after the main dot for proper stacking
-        ..._buildFeatureDots(context),
-      ],
-    );
-  }
+      ),
+      
+      
+      ..._buildFeatureDots(context),
+    ],
+  );
+}
 
   List<Widget> _buildFeatureDots(BuildContext context) {
-    List<Widget> dots = [];
+  List<Widget> dots = [];
+  
+  final double radius = 150.0;
+  
+  for (int i = 0; i < features.length; i++) {
+    if (!_isExpanded) continue;
     
-    final double radius = 150.0; // Slightly larger radius
+    final double angle = (i * 2 * math.pi / features.length);
+    final double x = radius * math.cos(angle);
+    final double y = radius * math.sin(angle);
     
-    for (int i = 0; i < features.length; i++) {
-      // Only show when expanded
-      if (!_isExpanded) continue;
-      
-      final double angle = (i * 2 * math.pi / features.length);
-      final double x = radius * math.cos(angle);
-      final double y = radius * math.sin(angle);
-      
-      dots.add(
-        TweenAnimationBuilder(
+    dots.add(
+      Positioned(
+        left: MediaQuery.of(context).size.width / 2 + x - 35, 
+        top: MediaQuery.of(context).size.height / 2 + y - 35, 
+        child: TweenAnimationBuilder(
           tween: Tween<double>(begin: 0.0, end: 1.0),
-          // Slower animation
           duration: const Duration(milliseconds: 800),
-          // Smoother curve
           curve: Curves.easeOutBack,
-          // Longer staggered delay
-          onEnd: () {
-            // Small bounce effect at the end
-            setState(() {});
-          },
           builder: (context, double value, child) {
-            // Scale up from center of main dot
-            return Transform.translate(
-              offset: Offset(x * value, y * value),
-              child: Opacity(
-                opacity: value.clamp(0.0, 1.0),
-                child: Transform.scale(
-                  scale: value,
-                  child: SizedBox(
-                    width: 70,
-                    height: 70,
-                    child: FeatureDot(
+            return Opacity(
+              opacity: value.clamp(0.0, 1.0),
+              child: Transform.scale(
+                scale: value,
+                child: FeatureDot(
                       feature: features[i],
                       onTap: () => _navigateToFeature(context, features[i]),
                     ),
-                  ),
-                ),
               ),
             );
           },
         ),
-      );
-    }
-    
-    return dots;
+      ),
+    );
   }
+  
+  return dots;
+}
 }

@@ -35,7 +35,7 @@ dependencies:
   shared_preferences: ^2.1.1  # For local storage
   provider: ^6.0.5  # For state management
   intl: ^0.18.1  # For date formatting
-  flutter_compass: ^0.7.0
+  flutter_compass: ^0.8.0
   geolocator: ^9.0.2
   font_awesome_flutter: ^10.6.0
 
