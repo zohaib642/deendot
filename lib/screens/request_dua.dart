@@ -7,13 +7,46 @@ class RequestDuaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Request Dua'),
-        backgroundColor: Color.fromARGB(255, 0, 121, 109),
+        title: const Text('Request Dua', style: TextStyle(fontFamily: "PlayfairDisplay")),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 0, 121, 109),
       ),
-      body: const Center(
-        child: Text(
-          'Request Dua Feature',
-          style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 255, 255)),
+      body: Container(
+        color: const Color.fromARGB(255, 0, 35, 0),
+        child: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.construction,
+                size: 80,
+                color: Colors.white,
+              ),
+              SizedBox(height: 24),
+              Text(
+                "Coming Soon!",
+                style: TextStyle(
+                  fontFamily: 'PlayfairDisplay',
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 16),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  "Our Dua Requesting system is under development.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Oxygen',
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

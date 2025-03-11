@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_animate: ^4.1.1  # For advanced animations
-  adhan: ^2.0.0-nullsafety.2  # For prayer times calculation
   shared_preferences: ^2.1.1  # For local storage
   provider: ^6.0.5  # For state management
   intl: ^0.18.1  # For date formatting
@@ -43,6 +42,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  adhan: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -86,8 +86,10 @@ flutter:
     - family: PlayfairDisplay
       fonts:
         - asset: fonts/PlayfairDisplay-VariableFont_wght.ttf
-        # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
+    - family: Oxygen
+      fonts:
+        - asset: fonts/Oxygen-Light.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

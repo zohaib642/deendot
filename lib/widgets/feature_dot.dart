@@ -58,6 +58,7 @@ class FeatureDot extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 8,
+                    fontFamily: 'Oxygen',
                     fontWeight: FontWeight.w200,
                   ),
                   textAlign: TextAlign.center,
