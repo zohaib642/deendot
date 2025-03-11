@@ -52,7 +52,7 @@ class FeatureDot extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 8,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w200,
               ),
               textAlign: TextAlign.center,
             ),
