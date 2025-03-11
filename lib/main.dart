@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'DeenDot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: const Color(0xFF4CAF50),
+        primaryColor: const Color.fromARGB(255, 147, 120, 31),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 0, 20, 0),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF4CAF50),
+          seedColor: const Color.fromARGB(255, 147, 120, 31),
           brightness: Brightness.light,
         ),
         useMaterial3: true,

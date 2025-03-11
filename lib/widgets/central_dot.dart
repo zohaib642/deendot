@@ -125,7 +125,7 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
                   ),
                   child: Icon(
                     _isExpanded ? Icons.close : Icons.touch_app,
-                    color: Colors.white,
+                    color: const Color.fromARGB(255, 0, 0, 0),
                     size: 40,
                   ),
                 ),

@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
                 'DeenDot',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor,
                 ),
