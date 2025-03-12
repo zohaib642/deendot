@@ -22,25 +22,25 @@ class _CentralDotState extends State<CentralDot> with SingleTickerProviderStateM
     FeatureItem(
       "Request Dua", 
       Icons.volunteer_activism, 
-      Color.fromARGB(255, 0, 121, 109), 
+      Color.fromARGB(255, 255, 255, 255), 
       'request_dua'
     ),
     FeatureItem(
       "Prayer", 
       Icons.mosque, 
-      Color.fromARGB(255, 0, 121, 109), 
+      Color.fromARGB(255, 255, 255, 255), 
       'prayer'
     ),
     FeatureItem(
       "Network", 
       Icons.people, 
-      Color.fromARGB(255, 0, 121, 109), 
+      Color.fromARGB(255, 255, 255, 255), 
       'network'
     ),
     FeatureItem(
       "Quran", 
       Icons.menu_book, 
-      Color.fromARGB(255, 0, 121, 109), 
+      Color.fromARGB(255, 255, 255, 255), 
       'quran'
     ),
   ];

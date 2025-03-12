@@ -49,14 +49,14 @@ class FeatureDot extends StatelessWidget {
               children: [
                 Icon(
                   feature.icon,
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 0, 35, 0),
                   size: 30,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   feature.name,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 35, 0),
                     fontSize: 8,
                     fontFamily: 'Oxygen',
                     fontWeight: FontWeight.w200,

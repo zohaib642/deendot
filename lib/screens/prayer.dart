@@ -39,7 +39,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
   
   // Define the main color to be used throughout the app
   final Color mainColor = Color.fromARGB(255, 0, 35, 0);
-  final Color cardColor = Color.fromARGB(255, 0, 140, 125);
+  final Color cardColor = Color.fromARGB(255, 255, 255, 255);
   
   @override
   void initState() {
@@ -212,7 +212,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
               indicatorColor: Colors.white,
               indicatorWeight: 3,
               indicatorSize: TabBarIndicatorSize.label,
-              labelStyle: TextStyle(fontFamily: 'Oxygen', fontWeight: FontWeight.bold, fontSize: 16),
+              labelStyle: TextStyle(fontFamily: 'PlayfairDisplay', fontWeight: FontWeight.w200, fontSize: 16),
               tabs: [
                 Tab(
                   icon: Icon(Icons.access_time),
@@ -341,7 +341,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
                 value: selectedRegion,
                 icon: const Icon(Icons.arrow_drop_down, color: Color.fromARGB(255, 255, 255, 255)),
                 elevation: 16,
-                dropdownColor: cardColor,
+                dropdownColor: Color.fromARGB(255, 0, 35, 0),
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255), 
                   fontWeight: FontWeight.bold,
@@ -377,7 +377,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
                 'Madhab: ',
                 style: TextStyle(
                   fontSize: 16, 
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w200,
                   fontFamily: 'Oxygen',
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
@@ -390,33 +390,14 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
           ),
         ),
 
-        if (currentPosition != null)
+        // Next Prayer Info (moved up, before prayer times card)
+        if (prayerTimes != null)
           Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Text(
-              'Location: ${currentPosition!.latitude.toStringAsFixed(4)}°, ${currentPosition!.longitude.toStringAsFixed(4)}°',
-              style: TextStyle(
-                fontSize: 16, 
-                fontWeight: FontWeight.bold, 
-                fontFamily: 'Oxygen',
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: _buildNextPrayerInfo(),
           ),
 
-        Padding(
-          padding: const EdgeInsets.only(bottom: 24.0),
-          child: Text(
-            'Date: ${DateFormat.yMMMMd().format(DateTime.now())}',
-            style: TextStyle(
-              fontSize: 18, 
-              fontWeight: FontWeight.bold, 
-              fontFamily: 'Oxygen',
-              color: Color.fromARGB(255, 255, 255, 255),
-            ),
-          ),
-        ),
-
+        // Prayer Times Card (moved down, after next prayer info)
         Card(
           elevation: 4,
           color: cardColor, // Slightly lighter green for the card
@@ -457,12 +438,6 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
             ),
           ),
         ),
-
-        if (prayerTimes != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 24.0),
-            child: _buildNextPrayerInfo(),
-          ),
 
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0),
@@ -523,18 +498,18 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
             prayerName,
             style: TextStyle(
               fontSize: 18, 
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w200,
               fontFamily: 'Oxygen',
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
           Text(
             time,
             style: TextStyle(
               fontSize: 18, 
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w200,
               fontFamily: 'Oxygen',
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
         ],
@@ -619,7 +594,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
               'Next Prayer',
               style: TextStyle(
                 fontSize: 16, 
-                fontWeight: FontWeight.bold, 
+                fontWeight: FontWeight.w200, 
                 fontFamily: 'Oxygen',
                 color: Color.fromARGB(255, 255, 255, 255),
               ),
@@ -651,7 +626,7 @@ class _PrayerScreenState extends State<PrayerScreen> with SingleTickerProviderSt
               'Time Remaining: ${hours}h ${minutes}m',
               style: TextStyle(
                 fontSize: 16, 
-                fontWeight: FontWeight.w500, 
+                fontWeight: FontWeight.w200, 
                 fontFamily: 'Oxygen',
                 color: Color.fromARGB(255, 255, 255, 255),
               ),
