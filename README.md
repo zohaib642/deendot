@@ -15,8 +15,8 @@ DeenDot is a proposed mobile application designed to unite the UT Muslim Student
 - Expansion to other Muslim student organizations (e.g., Black Muslim Alliance, MDA, ISWARAH, ALM)  
 
 ## Resources
-- **Wireframe**: [View Here](https://docs.google.com/presentation/d/1BSWlpyAgT0DsKonEjch3fB0Tdf1KFSxiSmFOycISLuw/edit?usp=sharing)  
-- **MVP Demo**: [Watch Here](https://youtu.be/ukZ3PhHcCls)  
+- **Wireframe**: [View Here](https://docs.google.com/presentation/d/1BSWlpyAqT0DsKonEjch3fB0Tdf1KFSxiSmFOyclSLuw/edit?usp=sharing)  
+- **MVP Demo**: [Watch Here](https://youtu.be/uKZ3PnHcCIs)  
 
 ## Note
 This is an initial proposal and MVP. Feedback and collaboration are welcome to refine the app for community needs!  
